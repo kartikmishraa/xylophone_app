@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,13 +19,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class XylophoneApp extends StatelessWidget {
+class XylophoneApp extends StatefulWidget {
   const XylophoneApp({ Key? key }) : super(key: key);
 
-  Expanded xyloKey(Color _color) {
+  @override
+  State<XylophoneApp> createState() => _XylophoneAppState();
+}
+
+class _XylophoneAppState extends State<XylophoneApp> {
+
+  void playMedia(int audioNum) {
+    final audioPlayer = AudioCache();
+    audioPlayer.play('note$audioNum.wav');
+  }
+
+  Expanded xyloKey(int audioNum, Color _color) {
     return Expanded(
       child: GestureDetector(
-        onTap: () => {},
+        onTap: () {playMedia(audioNum);},
         child: Container(
           color: _color,
         ),
@@ -38,12 +50,13 @@ class XylophoneApp extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            xyloKey(Colors.red),
-            xyloKey(Colors.orange),
-            xyloKey(Colors.blue),
-            xyloKey(Colors.pink),
-            xyloKey(Colors.greenAccent),
-            xyloKey(Colors.limeAccent),
+            xyloKey(1, Colors.red),
+            xyloKey(2, Colors.orange),
+            xyloKey(3, Colors.blue),
+            xyloKey(4, Colors.pink),
+            xyloKey(5, Colors.greenAccent),
+            xyloKey(6, Colors.limeAccent),
+            xyloKey(7, Colors.deepPurpleAccent),
           ],
         ),
       ),
